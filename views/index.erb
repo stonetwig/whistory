@@ -9,8 +9,8 @@
         <h1>COMPARE TWO SITES</h1>  
         <form method="post">  
             <input type="text" value="<%= h(params[:url]) %>" placeholder="http://google.se" name="url" id="url" />
-            <input type="text" value="<%= h(params[:url]) %>" placeholder="http://yahoo.se" name="url" id="url" />  
-            <input type="submit" value="get image" id="submit" />  
+            <input type="text" value="<%= h(params[:url2]) %>" placeholder="http://yahoo.se" name="url2" id="url2" />  
+             <input type="submit" value="get diff" id="submit" />  
         </form>  
         <div class="clear"></div>
         <% if @errors %>
@@ -23,10 +23,16 @@
         <% end %> 
     </div>  
 
-    <% if @link %>  
-        <div class="result">  
-            Your image is: 
-            <img src="http://localhost:9393/img/<%= @link %>" /> 
+    <% if @links %>
+        <div class="result">
+            <% if @diff %>
+                <img src="http://localhost:9393/img/diff.png" /> 
+            <% end %>
+
+            <% @links.each_with_index do |link, index| %>
+                <p>Image <%= index %></p>
+                <img src="http://localhost:9393/img/<%= link %>" /> 
+            <% end %>
         </div>  
     <% end %> 
 </body>  

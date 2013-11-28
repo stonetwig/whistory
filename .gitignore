@@ -1,1 +1,3 @@
 *.rdb
+static/img
+static/img/**
