@@ -2,82 +2,31 @@
 <html>  
 <head>  
     <title>URL TO IMAGE</title>  
-    <style>  
-    body {  
-        font-family:"Gill Sans", "Gill Sans MT", Sans-Serif;  
-    }  
-    .container {  
-        width:400px;  
-        margin:120px auto 0px auto;  
-    }  
-    h1 {  
-        width:400px;  
-        margin-bottom:12px;  
-        text-align:center;  
-        color:#ff4b33;  
-        font-size:40px;  
-        padding-bottom:8px;  
-        border-bottom:2px solid #ff4b33;  
-    }  
-    form {  
-        display:block;  
-        width:600px;  
-    }  
-    input {  
-        display:block;  
-        float:left;  
-        padding:8px;  
-        font-size:16px;  
-    }  
-    #url {  
-        width:280px;  
-        margin-right:12px;  
-    }  
-    #submit {  
-        width:88px;  
-        border:none;  
-        background:#ff4b33;  
-        padding:10px;  
-    }  
-    #submit:hover {  
-        background:#ff7866;  
-    }  
-    .clear {  
-        height:1px;  
-        width:400px;  
-        clear:both;  
-    }  
-    .result {  
-        clear:both;  
-        width:400px;  
-        margin-top:12px;  
-        border-top:2px solid #ff4b33;  
-        padding-top:12px;  
-        text-align:center;  
-    }  
-    .result a {  
-        font-size:24px;  
-        display:block;  
-        margin-top:8px;  
-        color:#ff2d11;  
-        background:#ffd2cc;  
-        padding:8px;  
-    }  
-    </style>  
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>  
 <body>  
     <div class="container">  
-        <h1>URL TO IMAGE</h1>  
+        <h1>COMPARE TWO SITES</h1>  
         <form method="post">  
-            <input type="text" value="<%= h(params[:url]) %>" placeholder="http://google.se" name="url" id="url" />  
+            <input type="text" value="<%= h(params[:url]) %>" placeholder="http://google.se" name="url" id="url" />
+            <input type="text" value="<%= h(params[:url]) %>" placeholder="http://yahoo.se" name="url" id="url" />  
             <input type="submit" value="get image" id="submit" />  
         </form>  
-        <div class="clear"></div>  
-        <% if @link %>  
+        <div class="clear"></div>
+        <% if @errors %>
+            <div class="error">
+                <h2>Noticed some errors:</h2>
+                <% @errors.each do |error| %>
+                    <p><%= error %></p>
+                <% end %>
+            </div>
+        <% end %> 
+    </div>  
+
+    <% if @link %>  
         <div class="result">  
             Your image is: 
-            <img src="http://localhost:9393/tmp/<%= @link %>" /> 
+            <img src="http://localhost:9393/img/<%= @link %>" /> 
         </div>  
-        <% end %>  
-    </div>  
+    <% end %> 
 </body>  
